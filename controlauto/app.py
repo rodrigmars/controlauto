@@ -12,6 +12,8 @@ def main() -> None:
 
     root.title("controlauto 1.0.0")
 
+    root.resizable(False, False)
+
     UserView(root)
 
     root.mainloop()
