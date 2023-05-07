@@ -9,6 +9,11 @@ class UserView(UserPresenter, User):
 
         super().__init__()
 
+        self.BACKGROUND_YELLOW:dict = {"background": "yellow"}
+        self.FOREGROUND_YELLOW:dict = {"foreground": "red"}
+
+        self.BACKGROUND_DEFAULT:dict = {"background": "white"}
+        self.FOREGROUND_DEFAULT:dict = {"foreground": "black"}
         # configure(text_font = ('verdana', 8)
 
         self.frmUser = tk.Frame(root, pady=50)
@@ -71,8 +76,8 @@ class UserView(UserPresenter, User):
 
         if self.name_text.get().strip() == "":
             self.name_entry.focus()
-            self.name_entry.configure({"background": "yellow"})
-            self.name_notify.configure({"foreground": "red"})
+            self.name_entry.configure(**self.BACKGROUND_YELLOW)
+            self.name_notify.configure(**self.FOREGROUND_YELLOW)
             return False
 
         # if self.name_text.get().__len__() < 1:
@@ -89,13 +94,14 @@ class UserView(UserPresenter, User):
         pass
 
     def reset(self):
-        self.name_entry.configure({"background": "white"})
-        self.email_entry.configure({"background": "white"})
-        self.telephone_entry.configure({"background": "white"})
 
-        self.name_notify.configure({"foreground": "black"})
-        self.email_notify.configure({"foreground": "black"})
-        self.telephone_notify.configure({"foreground": "black"})
+        self.name_entry.configure(**self.BACKGROUND_DEFAULT)
+        self.email_entry.configure(**self.BACKGROUND_DEFAULT)
+        self.telephone_entry.configure(**self.BACKGROUND_DEFAULT)
+
+        self.name_notify.configure(**self.FOREGROUND_DEFAULT)
+        self.email_notify.configure(**self.FOREGROUND_DEFAULT)
+        self.telephone_notify.configure(**self.FOREGROUND_DEFAULT)
 
     def clear(self):
         self.name_text.set("")
