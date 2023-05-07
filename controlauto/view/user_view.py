@@ -28,8 +28,8 @@ class UserView(UserPresenter, User):
         self.name_label = tk.Label(self.frmUser, text="Nome")
         self.name_label.grid(row=0, column=0, columnspan=2, sticky='nsew')
 
-        self.name_entry = tk.Entry(self.frmUser, textvariable=self.name_text)
-        self.name_entry.grid(row=1, column=0, columnspan=2, sticky='nsew')
+        self.name_entry = tk.Entry(self.frmUser, textvariable=self.name_text, width=35)
+        self.name_entry.grid(row=1, column=0, sticky='nsew')
         self.name_entry.focus()
 
         self.name_notify = tk.Label(self.frmUser, text="*")
@@ -37,17 +37,17 @@ class UserView(UserPresenter, User):
 
         # Email
         self.email_label = tk.Label(self.frmUser, text="Email")
-        self.email_label.grid(row=2, column=0, sticky='nsew')
+        self.email_label.grid(row=2, column=0, columnspan=2, sticky='nsew')
 
-        self.email_entry = tk.Entry(self.frmUser, textvariable=self.email_text)
-        self.email_entry.grid(row=3, column=0, columnspan=2, sticky='nsew')
+        self.email_entry = tk.Entry(self.frmUser, textvariable=self.email_text, width=5)
+        self.email_entry.grid(row=3, column=0, sticky='nsew')
 
         self.email_notify = tk.Label(self.frmUser, text="*")
         self.email_notify.grid(row=3, column=1, sticky='nsew')
 
         # Telefone
         self.telephone_label = tk.Label(self.frmUser, text="Telefone")
-        self.telephone_label.grid(row=4, column=0, sticky='nsew')
+        self.telephone_label.grid(row=4, column=0, columnspan=2, sticky='nsew')
 
         self.telephone_entry = tk.Entry(
             self.frmUser, textvariable=self.telephone_text)
@@ -59,7 +59,7 @@ class UserView(UserPresenter, User):
         # Button
         self.add_button = tk.Button(
             self.frmUser, text="Adicionar", command=self.add)
-        self.add_button.grid(row=6, column=0, sticky='nsew')
+        self.add_button.grid(row=6, column=0, columnspan=2, sticky='nsew', pady=20)
 
     def add(self) -> None:
 
