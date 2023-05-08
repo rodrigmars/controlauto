@@ -1,7 +1,7 @@
 import tkinter as tk
 from presenter.user_presenter import UserPresenter
 from model.User import User
-
+from model.EntryPhoneNumber import EntryPhoneNumber
 
 class UserView(UserPresenter, User):
 
@@ -32,6 +32,9 @@ class UserView(UserPresenter, User):
         self.name_entry.grid(row=1, column=0, sticky='nsew')
         self.name_entry.focus()
 
+        self.name_entry.bind("<Key>", self.event_key)
+
+
         self.name_notify = tk.Label(self.frmUser, text="*")
         self.name_notify.grid(row=1, column=1, sticky='nsew')
 
@@ -49,8 +52,14 @@ class UserView(UserPresenter, User):
         self.telephone_label = tk.Label(self.frmUser, text="Telefone")
         self.telephone_label.grid(row=4, column=0, columnspan=2, sticky='nsew')
 
-        self.telephone_entry = tk.Entry(
-            self.frmUser, textvariable=self.telephone_text)
+        # self.telephone_entry = tk.Entry(
+        #     self.frmUser, textvariable=self.telephone_text)
+        # self.telephone_entry.grid(row=5, column=0, sticky='nsew')
+
+        self.telephone_entry = EntryPhoneNumber(self.frmUser,
+                                                placeholder='(000)-1111-111111',
+                                                textvariable=self.telephone_text)
+
         self.telephone_entry.grid(row=5, column=0, sticky='nsew')
 
         self.telephone_notify = tk.Label(self.frmUser, text="*")
@@ -60,6 +69,30 @@ class UserView(UserPresenter, User):
         self.add_button = tk.Button(
             self.frmUser, text="Adicionar", command=self.add)
         self.add_button.grid(row=6, column=0, columnspan=2, sticky='nsew', pady=20)
+
+        self.digits: str = ""
+
+    def digits_set(self, key: str) -> None:
+        self.digits += key
+
+    def digits_get(self) -> str:
+        return self.digits
+
+    def event_key(self, event):
+
+        digit = str(event.char)
+
+        print("name_text:", self.name_text.get())
+
+        if (len(self.name_text.get()) <= 9):
+            return exit
+
+        
+
+        # self.digits_set(self.name_text.get())
+
+        # print("pressed", self.digits_get())
+
 
     def add(self) -> None:
 
