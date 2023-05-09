@@ -1,14 +1,20 @@
 import tkinter as tk
 
 
-class NameEntryComponent(tk.Entry):
-
-    def __init__(self, min_digits:int, max_digits: int,  *args, **kwargs) -> None:
+class NameLabel(tk.Label):
+    def __init__(self, *args, **kwargs) -> None:
 
         super().__init__(*args, **kwargs)
 
-        self.min_digits = min_digits
-        self.total_digits = max_digits
+
+class NameEntry(tk.Entry):
+
+    def __init__(self, *args, **kwargs) -> None:
+
+        super().__init__(*args, **kwargs)
+
+        self.min_length = kwargs["min_length"]
+        self.max_length = kwargs["max_length"]
         self.digits: str = ""
 
         self.bind("<KeyPress>", self.onKeyDown)
@@ -25,7 +31,7 @@ class NameEntryComponent(tk.Entry):
         if str(event.char).isalpha() is not True:
             return "break"
 
-        if len(self.get_digits()) >= self.total_digits:
+        if len(self.get_digits()) >= self.max_length:
             return "break"
 
         self.set_digits(self.get_digits() + str(event.char))

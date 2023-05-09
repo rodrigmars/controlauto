@@ -2,7 +2,7 @@ import tkinter as tk
 from presenter.user_presenter import UserPresenter
 from model.User import User
 from model.EntryPhoneNumber import EntryPhoneNumber
-
+from components.NameComponent import NameEntry, NameLabel
 
 
 class UserView(tk.Frame):
@@ -23,10 +23,12 @@ class UserView(tk.Frame):
         self.telephone_text = tk.StringVar(self, value=None)
 
         # Nome
-        self.name_label = tk.Label(self, text="Nome")
+        self.name_label = NameLabel(self, text="Nome")
         self.name_label.grid(row=0, column=0, columnspan=2, sticky='nsew')
 
-        self.name_entry = tk.Entry(self, textvariable=self.name_text, width=35)
+        self.name_entry = NameEntry(self, min_length=5, max_length=5, textvariable=self.name_text,
+                                    width=35)
+
         self.name_entry.grid(row=1, column=0, sticky='nsew')
         self.name_entry.focus()
 
