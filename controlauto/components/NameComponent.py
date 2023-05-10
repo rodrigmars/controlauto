@@ -20,12 +20,18 @@ class NameEntry(tk.Entry):
         self.bind("<KeyPress>", self.on_key_down)
         self.bind("<BackSpace>", self.on_back_space)
         self.bind("<Tab>", self.on_focus)
+        # self.bind("<Key>", self.on_click)
+        # self.bind('<<Modified>>', self.on_modified)
 
         self.log_message = tk.Label(self, text="")
 
+    def on_click(self, _):
+       position = self.index(tk.INSERT)
+       self.icursor(position - 1)
+
     def on_focus(self, event):
         event.widget.tk_focusNext().focus()
-        return("break")
+        return ("break")
 
     def get_min_length(self) -> int:
         return self.min_length
@@ -41,6 +47,8 @@ class NameEntry(tk.Entry):
 
     def on_key_down(self, event):
 
+        self.icursor(tk.END)
+
         if str(event.char).isalpha() is not True:
             return "break"
 
@@ -49,8 +57,18 @@ class NameEntry(tk.Entry):
 
         self.set_digits(self.get_digits() + str(event.char))
 
-    def on_back_space(self, _: object):
+    def on_back_space(self, _: tk.Event):
+
+        self.icursor(tk.END)
+
+        if self.select_present():
+            self.select_clear()
+            return "break"
+
         self.set_digits(self.get_digits()[:-1:])
+
+        # else:
+        #     self.set_digits(self.get_digits()[:-1:])
 
     # def on_focus_out(self, event) -> object:
 
