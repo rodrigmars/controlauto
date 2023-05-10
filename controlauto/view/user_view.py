@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from presenter.user_presenter import UserPresenter
 from model.User import User
 from model.EntryPhoneNumber import EntryPhoneNumber
@@ -26,7 +27,7 @@ class UserView(tk.Frame):
         self.name_label = NameLabel(self, text="Nome")
         self.name_label.grid(row=0, column=0, columnspan=2, sticky='nsew')
 
-        self.name_entry = NameEntry(self, min_length=5, max_length=5, textvariable=self.name_text,
+        self.name_entry = NameEntry(self, textvariable=self.name_text,
                                     width=35)
 
         self.name_entry.grid(row=1, column=0, sticky='nsew')
@@ -35,20 +36,28 @@ class UserView(tk.Frame):
         self.name_notify = tk.Label(self, text="*")
         self.name_notify.grid(row=1, column=1, sticky='nsew')
 
+        self.name_message_label = NameLabel(self)
+        self.name_message_label.grid(row=2, column=2, columnspan=2, sticky='nsew')
+
+        # self.name_label_message = NameLabel(self, text="Erro message")
+        # self.name_label_message.grid(row=, column=0, columnspan=2, sticky='nsew')
+
+
+
         # Email
         self.email_label = tk.Label(self, text="Email")
-        self.email_label.grid(row=2, column=0, columnspan=2, sticky='nsew')
+        self.email_label.grid(row=4, column=0, columnspan=2, sticky='nsew')
 
         self.email_entry = tk.Entry(
             self, textvariable=self.email_text, width=5)
-        self.email_entry.grid(row=3, column=0, sticky='nsew')
+        self.email_entry.grid(row=5, column=0, sticky='nsew')
 
-        self.email_notify = tk.Label(self, text="*")
-        self.email_notify.grid(row=3, column=1, sticky='nsew')
+        self.email_message_label = tk.Label(self, text="Email")
+        self.email_message_label.grid(row=6, column=0, columnspan=2, sticky='nsew')
 
         # Telefone
         self.telephone_label = tk.Label(self, text="Telefone")
-        self.telephone_label.grid(row=4, column=0, columnspan=2, sticky='nsew')
+        self.telephone_label.grid(row=7, column=0, columnspan=2, sticky='nsew')
 
         # self.telephone_entry = tk.Entry(
         #     textvariable=self.telephone_text)
@@ -58,16 +67,16 @@ class UserView(tk.Frame):
                                                 placeholder='(000)-1111-111111',
                                                 textvariable=self.telephone_text)
 
-        self.telephone_entry.grid(row=5, column=0, sticky='nsew')
+        self.telephone_entry.grid(row=8, column=0, sticky='nsew')
 
         self.telephone_notify = tk.Label(self, text="*")
-        self.telephone_notify.grid(row=5, column=1, sticky='nsew')
+        self.telephone_notify.grid(row=9, column=1, sticky='nsew')
 
         # Button
         self.add_button = tk.Button(self, text="Adicionar",
                                     command=self.add)
 
-        self.add_button.grid(row=6,
+        self.add_button.grid(row=11,
                              column=0,
                              columnspan=2,
                              sticky='nsew',
@@ -86,7 +95,9 @@ class UserView(tk.Frame):
         if self.check():
             # self.insert(self.name_text.get(),
             #             self.email_text.get(),
+
             #             self.telephone_text.get())
+            messagebox.showwarning(title="Cadastro Usuário", message="Usuário cadastrado com sucesso")
             self.clear()
 
     def remove(self) -> None:
